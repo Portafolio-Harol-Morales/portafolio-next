@@ -157,12 +157,11 @@ export const Proyectos = () => {
       {/* Modal usando Dialog de la carpeta ui */}
     <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
   <DialogContent
-    className="max-w-lg"
+     className="max-w-lg max-h-[80vh] md:max-h-[95vh] overflow-y-auto"
     style={{
-      maxHeight: "95vh",
       overflowY: "auto",
     }}
-  >
+  > 
     {selectedProject && (
       <>
         <DialogHeader>
@@ -229,37 +228,37 @@ export const Proyectos = () => {
             ))}
           </div>
         </div>
-        <DialogFooter className="flex gap-2">
-          {selectedProject.github && (
-            <Button variant="outline" size="sm" asChild>
-              <Link
-                href={selectedProject.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="mr-2 h-4 w-4" />
-                Código
-              </Link>
-            </Button>
-          )}
-          {selectedProject.url && (
-            <Button size="sm" asChild>
-              <Link
-                href={selectedProject.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver
-                <ExternalLink className="mr-2 h-4 w-4" />
-              </Link>
-            </Button>
-          )}
-          <DialogClose asChild>
-            <Button size="sm" variant="destructive" onClick={() => setSelectedProject(null)}>
-              Cerrar
-            </Button>
-          </DialogClose>
-        </DialogFooter>
+       <DialogFooter className="flex flex-wrap gap-2 justify-center md:justify-end">
+  {selectedProject.github && (
+    <Button variant="outline" size="sm" asChild>
+      <Link
+        href={selectedProject.github}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Github className="mr-2 h-4 w-4" />
+        Código
+      </Link>
+    </Button>
+  )}
+  {selectedProject.url && (
+    <Button size="sm" asChild>
+      <Link
+        href={selectedProject.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Ver
+        <ExternalLink className="mr-2 h-4 w-4" />
+      </Link>
+    </Button>
+  )}
+  <DialogClose asChild>
+    <Button size="sm" variant="destructive" onClick={() => setSelectedProject(null)}>
+      Cerrar
+    </Button>
+  </DialogClose>
+</DialogFooter>
       </>
     )}
   </DialogContent>
