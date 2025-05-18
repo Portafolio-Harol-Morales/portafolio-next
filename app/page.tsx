@@ -77,7 +77,7 @@ export default function Home() {
             <div className="flex justify-center">
               <Avatar className="h-64 w-64">
                 <AvatarImage
-                  src="/placeholder.svg?height=256&width=256"
+                  src="/img-hero.png"
                   alt="Tu Nombre"
                 />
                 <AvatarFallback>TN</AvatarFallback>
