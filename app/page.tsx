@@ -6,7 +6,7 @@ import { Skills } from "@/components/Skills";
 import { Footer } from "@/components/Footer";
 import { Experiencia } from "@/components/Experiencia";
 import { Contactame } from "@/components/Contactame";
-import { Loader } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import {
   Github,
   Linkedin,
@@ -82,7 +82,7 @@ export default function Home() {
                   alt="Harol Morales"
                 />
                 <AvatarFallback>
-                   <Loader className="h-8 w-8 animate-spin text-primary" />
+                   <LoaderCircle className="h-8 w-8 animate-spin text-primary" />
                 </AvatarFallback>
               </Avatar>
             </div>

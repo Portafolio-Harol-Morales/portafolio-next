@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Github, Linkedin, Mail } from "lucide-react";
-import { Loader } from "lucide-react";
+import { Github, Linkedin, Mail, LoaderCircle } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -20,7 +19,6 @@ function ToastSimple({
   type?: "success" | "error";
   onClose: () => void;
 }) {
-  // Auto cerrar a los 3 segundos
   setTimeout(() => onClose(), 3000);
 
   return (
@@ -206,7 +204,7 @@ export const Contactame = () => {
                   )}
                 </div>
                 <Button className="w-full" disabled={loading}>
-                  {loading ? <Loader className="h-8 w-8 animate-spin text-white" />: "Enviar mensaje"}
+                  {loading ? <LoaderCircle className="h-8 w-8 animate-spin text-white" />: "Enviar mensaje"}
                 </Button>
               </form>
             </CardContent>
@@ -267,7 +265,6 @@ export const Contactame = () => {
         </div>
       </div>
 
-      {/* Renderiza el Toast flotante si hay mensaje */}
       {toastMsg && (
         <ToastSimple
           message={toastMsg}

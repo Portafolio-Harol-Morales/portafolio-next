@@ -1,5 +1,5 @@
 "use client";
-import { Code, ExternalLink, Github, Loader } from "lucide-react";
+import { Code, ExternalLink, Github, LoaderCircle } from "lucide-react";
 import { Badge } from "./ui/badge";
 import React, { useEffect, useState } from "react";
 import {
@@ -40,6 +40,7 @@ export const Proyectos = () => {
   const [error, setError] = useState<Error | null>(null);
   const [selectedProject, setSelectedProject] = useState<Proyecto | null>(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [isImgLoading, setIsImgLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,7 +74,7 @@ export const Proyectos = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-10">
-        <Loader className="animate-spin h-8 w-8 text-primary" />
+        <LoaderCircle className="animate-spin h-8 w-8 text-primary" />
       </div>
     );
   }
@@ -155,63 +156,99 @@ export const Proyectos = () => {
       </div>
 
       {/* Modal usando Dialog de la carpeta ui */}
-    <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-  <DialogContent
-     className="max-w-lg max-h-[80vh] md:max-h-[95vh] overflow-y-auto"
-    style={{
-      overflowY: "auto",
-    }}
-  > 
-    {selectedProject && (
-      <>
-        <DialogHeader>
-          <DialogTitle className="mb-5">{selectedProject.title}</DialogTitle>
-          <DialogDescription>
-            {selectedProject.info}
-          </DialogDescription>
-        </DialogHeader>
-        {/* Carrusel de imágenes */}
-      {selectedProject.imgProjects.length > 0 && (
+      <Dialog
+        open={!!selectedProject}
+        onOpenChange={() => setSelectedProject(null)}
+      >
+        <DialogContent
+          className="max-w-lg max-h-[95vh] lg:h-[80vh] overflow-y-auto"
+          style={{
+            overflowY: "auto",
+          }}
+        >
+          {selectedProject && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="mb-5">
+                  {selectedProject.title}
+                </DialogTitle>
+                <DialogDescription>{selectedProject.info}</DialogDescription>
+              </DialogHeader>
+              {/* Carrusel de imágenes */}
+            {selectedProject.imgProjects.length > 0 && (
   <div className="mb-4">
     <div className="relative w-full flex items-center justify-center h-72">
+      {/* Botón anterior */}
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10"
-        onClick={() =>
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-20"
+        onClick={() => {
+          setIsImgLoading(true);
           setCarouselIndex((prev) =>
             prev === 0
               ? selectedProject.imgProjects.length - 1
               : prev - 1
-          )
-        }
+          );
+        }}
         disabled={selectedProject.imgProjects.length < 2}
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M15 19l-7-7 7-7"
+          />
         </svg>
       </Button>
+      {/* Spinner overlay */}
+      {isImgLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/60 rounded z-10">
+          <LoaderCircle className="h-10 w-10 animate-spin text-primary" />
+        </div>
+      )}
+      {/* Imagen */}
       <img
         src={selectedProject.imgProjects[carouselIndex]}
         alt={`Imagen ${carouselIndex + 1}`}
         className="w-full h-72 object-contain rounded bg-black"
         style={{ maxHeight: "18rem" }}
+        onLoad={() => setIsImgLoading(false)}
+        onError={() => setIsImgLoading(false)}
       />
+      {/* Botón siguiente */}
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10"
-        onClick={() =>
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-20"
+        onClick={() => {
+          setIsImgLoading(true);
           setCarouselIndex((prev) =>
             prev === selectedProject.imgProjects.length - 1
               ? 0
               : prev + 1
-          )
-        }
+          );
+        }}
         disabled={selectedProject.imgProjects.length < 2}
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5l7 7-7 7"
+          />
         </svg>
       </Button>
     </div>
@@ -220,49 +257,61 @@ export const Proyectos = () => {
     </div>
   </div>
 )}
-        <div className="mb-4">
-          <strong>Tecnologías:</strong>
-          <div className="flex flex-wrap gap-2 mt-2">
-            {selectedProject.tecnologias.map((tec, i) => (
-              <Badge key={i} variant="secondary">{tec}</Badge>
-            ))}
-          </div>
-        </div>
-       <DialogFooter className="flex flex-wrap gap-2 justify-center md:justify-end">
-  {selectedProject.github && (
-    <Button variant="outline" size="sm" asChild>
-      <Link
-        href={selectedProject.github}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Github className="mr-2 h-4 w-4" />
-        Código
-      </Link>
-    </Button>
-  )}
-  {selectedProject.url && (
-    <Button size="sm" asChild>
-      <Link
-        href={selectedProject.url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Ver
-        <ExternalLink className="mr-2 h-4 w-4" />
-      </Link>
-    </Button>
-  )}
-  <DialogClose asChild>
-    <Button size="sm" variant="destructive" onClick={() => setSelectedProject(null)}>
-      Cerrar
-    </Button>
-  </DialogClose>
-</DialogFooter>
-      </>
-    )}
-  </DialogContent>
-</Dialog>
+              <div className="mb-4">
+                <strong>Tecnologías:</strong>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {selectedProject.tecnologias.map((tec, i) => (
+                    <Badge key={i} variant="secondary">
+                      {tec}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <DialogFooter className="flex flex-wrap gap-2 justify-center md:justify-end">
+                {selectedProject.github && (
+                  <Button variant="outline" size="sm" asChild>
+                    <Link
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Github className="mr-2 h-4 w-4" />
+                      Código
+                    </Link>
+                  </Button>
+                )}
+
+                <div className="flex gap-2 justify-end">
+
+                    {selectedProject.url && (
+                  <Button size="sm" asChild>
+                    <Link
+                      href={selectedProject.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Ver
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                )}
+                <DialogClose asChild>
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    onClick={() => setSelectedProject(null)}
+                  >
+                    Cerrar
+                  </Button>
+                </DialogClose>
+
+                </div>
+              
+              </DialogFooter>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
