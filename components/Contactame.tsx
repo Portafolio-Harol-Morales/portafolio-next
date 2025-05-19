@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { Loader } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -205,7 +206,7 @@ export const Contactame = () => {
                   )}
                 </div>
                 <Button className="w-full" disabled={loading}>
-                  {loading ? "Enviando..." : "Enviar mensaje"}
+                  {loading ? <Loader className="h-8 w-8 animate-spin text-white" />: "Enviar mensaje"}
                 </Button>
               </form>
             </CardContent>
