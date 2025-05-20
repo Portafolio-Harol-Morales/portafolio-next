@@ -161,7 +161,7 @@ export const Proyectos = () => {
         onOpenChange={() => setSelectedProject(null)}
       >
         <DialogContent
-          className="max-w-lg max-h-[95vh] lg:h-[80vh] overflow-y-auto"
+          className="max-w-lg max-h-[80vh] lg:h-[80vh] overflow-y-auto"
           style={{
             overflowY: "auto",
           }}
