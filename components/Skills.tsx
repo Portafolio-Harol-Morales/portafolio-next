@@ -80,6 +80,12 @@ export const Skills = () => {
                 </div>
               </div>
               <div className="flex justify-between items-center">
+                <span>NextJs</span>
+                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
+                  <div className="bg-primary h-full w-[90%]"></div>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
                 <span>Angular</span>
                 <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
                   <div className="bg-primary h-full w-[70%]"></div>
@@ -141,7 +147,7 @@ export const Skills = () => {
                   <div className="bg-primary h-full w-[95%]"></div>
                 </div>
               </div>
-               <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center">
                 <span>Azure</span>
                 <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
                   <div className="bg-primary h-full w-[65%]"></div>
@@ -166,7 +172,6 @@ export const Skills = () => {
                   <div className="bg-primary h-full w-[90%]"></div>
                 </div>
               </div>
-              
 
               <div className="flex justify-between items-center">
                 <span>Supabase</span>

@@ -175,88 +175,88 @@ export const Proyectos = () => {
                 <DialogDescription>{selectedProject.info}</DialogDescription>
               </DialogHeader>
               {/* Carrusel de imágenes */}
-            {selectedProject.imgProjects.length > 0 && (
-  <div className="mb-4">
-    <div className="relative w-full flex items-center justify-center h-72">
-      {/* Botón anterior */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-20"
-        onClick={() => {
-          setIsImgLoading(true);
-          setCarouselIndex((prev) =>
-            prev === 0
-              ? selectedProject.imgProjects.length - 1
-              : prev - 1
-          );
-        }}
-        disabled={selectedProject.imgProjects.length < 2}
-      >
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-      </Button>
-      {/* Spinner overlay */}
-      {isImgLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/60 rounded z-10">
-          <LoaderCircle className="h-10 w-10 animate-spin text-primary" />
-        </div>
-      )}
-      {/* Imagen */}
-      <img
-        src={selectedProject.imgProjects[carouselIndex]}
-        alt={`Imagen ${carouselIndex + 1}`}
-        className="w-full h-72 object-contain rounded bg-black"
-        style={{ maxHeight: "18rem" }}
-        onLoad={() => setIsImgLoading(false)}
-        onError={() => setIsImgLoading(false)}
-      />
-      {/* Botón siguiente */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-20"
-        onClick={() => {
-          setIsImgLoading(true);
-          setCarouselIndex((prev) =>
-            prev === selectedProject.imgProjects.length - 1
-              ? 0
-              : prev + 1
-          );
-        }}
-        disabled={selectedProject.imgProjects.length < 2}
-      >
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </Button>
-    </div>
-    <div className="text-center text-xs text-gray-500 mt-1">
-      {carouselIndex + 1} / {selectedProject.imgProjects.length}
-    </div>
-  </div>
-)}
+              {selectedProject.imgProjects.length > 0 && (
+                <div className="mb-4">
+                  <div className="relative w-full flex items-center justify-center h-72">
+                    {/* Botón anterior */}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute left-0 top-1/2 -translate-y-1/2 z-20"
+                      onClick={() => {
+                        setIsImgLoading(true);
+                        setCarouselIndex((prev) =>
+                          prev === 0
+                            ? selectedProject.imgProjects.length - 1
+                            : prev - 1
+                        );
+                      }}
+                      disabled={selectedProject.imgProjects.length < 2}
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                    </Button>
+                    {/* Spinner overlay */}
+                    {isImgLoading && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/60 rounded z-10">
+                        <LoaderCircle className="h-10 w-10 animate-spin text-primary" />
+                      </div>
+                    )}
+                    {/* Imagen */}
+                    <img
+                      src={selectedProject.imgProjects[carouselIndex]}
+                      alt={`Imagen ${carouselIndex + 1}`}
+                      className="w-full h-72 object-contain rounded bg-black"
+                      style={{ maxHeight: "18rem" }}
+                      onLoad={() => setIsImgLoading(false)}
+                      onError={() => setIsImgLoading(false)}
+                    />
+                    {/* Botón siguiente */}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-0 top-1/2 -translate-y-1/2 z-20"
+                      onClick={() => {
+                        setIsImgLoading(true);
+                        setCarouselIndex((prev) =>
+                          prev === selectedProject.imgProjects.length - 1
+                            ? 0
+                            : prev + 1
+                        );
+                      }}
+                      disabled={selectedProject.imgProjects.length < 2}
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </Button>
+                  </div>
+                  <div className="text-center text-xs text-gray-500 mt-1">
+                    {carouselIndex + 1} / {selectedProject.imgProjects.length}
+                  </div>
+                </div>
+              )}
               <div className="mb-4">
                 <strong>Tecnologías:</strong>
                 <div className="flex flex-wrap gap-2 mt-2">
@@ -282,31 +282,28 @@ export const Proyectos = () => {
                 )}
 
                 <div className="flex gap-2 justify-end">
-
-                    {selectedProject.url && (
-                  <Button size="sm" asChild>
-                    <Link
-                      href={selectedProject.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  {selectedProject.url && (
+                    <Button size="sm" asChild>
+                      <Link
+                        href={selectedProject.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Ver
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  )}
+                  <DialogClose asChild>
+                    <Button
+                      size="sm"
+                      variant="destructive"
+                      onClick={() => setSelectedProject(null)}
                     >
-                      Ver
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                )}
-                <DialogClose asChild>
-                  <Button
-                    size="sm"
-                    variant="destructive"
-                    onClick={() => setSelectedProject(null)}
-                  >
-                    Cerrar
-                  </Button>
-                </DialogClose>
-
+                      Cerrar
+                    </Button>
+                  </DialogClose>
                 </div>
-              
               </DialogFooter>
             </>
           )}
