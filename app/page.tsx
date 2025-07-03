@@ -134,7 +134,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-medium">Educación</h3>
-                    <p className="text-muted-foreground">CEUTEC / TECNÓLOGO EN DESARROLLO DE APLICACIONES WEB</p>
+                    <p className="text-muted-foreground">CEUTEC / Tecnólogo en desarrollo de aplicaciones web</p>
                   </div>
                 </div>
               </div>
