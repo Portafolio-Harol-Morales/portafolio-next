@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { Github, Linkedin, Mail, LoaderCircle } from "lucide-react";
 import {
   Card,
@@ -204,7 +205,11 @@ export const Contactame = () => {
                   )}
                 </div>
                 <Button className="w-full" disabled={loading}>
-                  {loading ? <LoaderCircle className="h-8 w-8 animate-spin text-white" />: "Enviar mensaje"}
+                  {loading ? (
+                    <LoaderCircle className="h-8 w-8 animate-spin text-white" />
+                  ) : (
+                    "Enviar mensaje"
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -216,32 +221,49 @@ export const Contactame = () => {
                 <CardTitle>Información de contacto</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Mail className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="font-medium">Email</p>
-                    <p className="text-muted-foreground">
-                      harol.kock34@gmail.com
-                    </p>
-                  </div>
+                <div className="mt-2">
+                  <Link target="_blank" href={"mailto:harol.kock34@gmail.com"}>
+                    <div className="flex items-center gap-3">
+                      <Mail className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="font-medium">Email</p>
+                        <p className="text-muted-foreground">
+                          harol.kock34@gmail.com
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Linkedin className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="font-medium">LinkedIn</p>
-                    <p className="text-muted-foreground">
-                      linkedin.com/in/harol-morales-762b17114/
-                    </p>
-                  </div>
+
+                <div className="mt-2">
+                  <a
+                    target="_blank"
+                    href="https://www.linkedin.com/in/harol-morales-762b17114/"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Linkedin className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="font-medium">LinkedIn</p>
+                        <p className="text-muted-foreground">
+                          linkedin.com/in/harol-morales-762b17114/
+                        </p>
+                      </div>
+                    </div>
+                  </a>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Github className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="font-medium">GitHub</p>
-                    <p className="text-muted-foreground">
-                      github.com/HaroruDa3
-                    </p>
-                  </div>
+
+                <div className="mt-2">
+                  <Link target="_blank" href="">
+                    <div className="flex items-center gap-3">
+                      <Github className="h-5 w-5 text-primary" />
+                      <div>
+                        <p className="font-medium">GitHub</p>
+                        <p className="text-muted-foreground">
+                          github.com/HaroruDa3
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
               </CardContent>
             </Card>

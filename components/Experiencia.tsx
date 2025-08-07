@@ -48,7 +48,7 @@ export const Experiencia = () => {
                     {job.company}
                   </CardDescription>
                 </div>
-                <Badge>{job.period}</Badge>
+                <Badge className="text-center">{job.period}</Badge>
               </div>
             </CardHeader>
             <CardContent>
