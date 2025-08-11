@@ -77,12 +77,9 @@ export default function Home() {
             </div>
             <div className="flex justify-center">
               <Avatar className="h-64 w-64">
-                <AvatarImage
-                  src="/img-hero.png"
-                  alt="Harol Morales"
-                />
+                <AvatarImage src="/img-hero.png" alt="Harol Morales" />
                 <AvatarFallback>
-                   <LoaderCircle className="h-8 w-8 animate-spin text-primary" />
+                  <LoaderCircle className="h-8 w-8 animate-spin text-primary" />
                 </AvatarFallback>
               </Avatar>
             </div>
@@ -122,10 +119,11 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-medium">Email</h3>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground break-all">
                       harol.kock34@gmail.com
                     </p>
                   </div>
+
                   <div>
                     <h3 className="font-medium">Disponibilidad</h3>
                     <p className="text-muted-foreground">
@@ -134,7 +132,9 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-medium">Educación</h3>
-                    <p className="text-muted-foreground">CEUTEC / Tecnólogo en desarrollo de aplicaciones web</p>
+                    <p className="text-muted-foreground">
+                      CEUTEC / Tecnólogo en desarrollo de aplicaciones web
+                    </p>
                   </div>
                 </div>
               </div>
