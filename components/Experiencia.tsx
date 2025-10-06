@@ -18,6 +18,13 @@ export const Experiencia = () => {
       <div className="space-y-8">
         {[
           {
+            role: "Ejecutivo Analista Programador",
+            company: "Televicentro",
+            period: "2025 - Presente",
+            description:
+              "Administracion de bases de datos SQL Server, mantenimiento y mejores a APIs desarrolladas en C# y visual basic, así como soporte y actualización de aplicaciones web para asegurar el correcto funcionamiento de los sistemas internos.",
+          },
+          {
             role: "Practicante Profesional",
             company: "Ideaworks International",
             period: "2024",
@@ -27,7 +34,7 @@ export const Experiencia = () => {
           {
             role: "Operador de Máster",
             company: "CORPOCENTRO",
-            period: "2021 - Presente",
+            period: "2021 - 2025",
             description:
               "Encargado de la supervisión y emisión de contenido televisivo. Manejo de equipos técnicos, monitoreo de señales y coordinación de transmisiones en vivo, garantizando la continuidad de la programación.",
           },
