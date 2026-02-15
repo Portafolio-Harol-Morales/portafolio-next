@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Github, Linkedin, Mail, LoaderCircle } from "lucide-react";
+import { Github, Linkedin, Mail, LoaderCircle, Send, MapPin, Download, ExternalLink } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -10,6 +10,9 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+import { Label } from "./ui/label";
 
 function ToastSimple({
   message,
@@ -24,10 +27,13 @@ function ToastSimple({
 
   return (
     <div
-      className={`fixed bottom-5 right-5 z-50 px-4 py-3 rounded-md shadow-md text-white transition-all duration-300
+      className={`fixed bottom-5 right-5 z-50 px-6 py-4 rounded-lg shadow-lg text-white transition-all duration-300 transform animate-in slide-in-from-right
       ${type === "success" ? "bg-green-600" : "bg-red-600"}`}
     >
-      {message}
+      <div className="flex items-center gap-2">
+        {type === "success" ? "✓" : "✕"}
+        <span className="font-medium">{message}</span>
+      </div>
     </div>
   );
 }
@@ -110,176 +116,227 @@ export const Contactame = () => {
         return;
       }
 
-      setToastMsg(" Mensaje enviado con éxito. Te contactaré pronto.");
+      setToastMsg("Mensaje enviado con éxito. Te contactaré pronto.");
       setToastType("success");
       setForm({ name: "", email: "", subject: "", message: "" });
       setErrors({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
       console.error("Error en el envío:", error);
-      setToastMsg("❌ Ocurrió un error al enviar el mensaje.");
+      setToastMsg("Ocurrió un error al enviar el mensaje.");
       setToastType("error");
     } finally {
       setLoading(false);
     }
   };
 
+  const contactInfo = [
+    {
+      icon: Mail,
+      label: "Email",
+      value: "harol.kock34@gmail.com",
+      href: "mailto:harol.kock34@gmail.com",
+    },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: "harol-morales-762b17114",
+      href: "https://www.linkedin.com/in/harol-morales-762b17114/",
+    },
+    {
+      icon: Github,
+      label: "GitHub",
+      value: "HaroruDa3",
+      href: "https://github.com/HaroruDa3",
+    },
+    {
+      icon: MapPin,
+      label: "Ubicación",
+      value: "San José Pinula, Guatemala",
+      href: null,
+    },
+  ];
+
   return (
-    <section id="contacto" className="bg-muted/40 py-16">
-      <div className="container space-y-8">
-        <div className="flex items-center gap-2">
-          <Mail className="h-6 w-6 text-primary" />
-          <h2 className="text-3xl font-bold">Contacto</h2>
+    <section id="contacto" className="relative py-20 bg-gradient-to-b from-background via-muted/20 to-background overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[size:40px_40px] pointer-events-none" />
+      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="container relative z-10 space-y-12">
+        {/* Header */}
+        <div className="text-center space-y-4">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+            Contacto
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            ¿Tienes un proyecto en mente? Estoy disponible para colaborar en tu próxima gran idea
+          </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Contact Form */}
+          <Card className="hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 border-muted/50 bg-card/50 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle>Envíame un mensaje</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Mail className="h-5 w-5 text-primary" />
+                Envíame un mensaje
+              </CardTitle>
               <CardDescription>
-                Completa el formulario y me pondré en contacto contigo lo antes
-                posible.
+                Completa el formulario y me pondré en contacto contigo lo antes posible
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form className="space-y-4" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-4">
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">
-                      Nombre
-                    </label>
-                    <input
+                    <Label htmlFor="name">Nombre</Label>
+                    <Input
                       id="name"
                       value={form.name}
                       onChange={handleChange}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                       placeholder="Tu nombre"
+                      className={errors.name ? "border-red-500" : ""}
                     />
                     {errors.name && (
-                      <p className="text-sm text-red-500">{errors.name}</p>
+                      <p className="text-sm text-red-500 flex items-center gap-1">
+                        <span className="text-xs">●</span>
+                        {errors.name}
+                      </p>
                     )}
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
-                      Email
-                    </label>
-                    <input
+                    <Label htmlFor="email">Email</Label>
+                    <Input
                       id="email"
                       type="email"
                       value={form.email}
                       onChange={handleChange}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                       placeholder="tu@email.com"
+                      className={errors.email ? "border-red-500" : ""}
                     />
                     {errors.email && (
-                      <p className="text-sm text-red-500">{errors.email}</p>
+                      <p className="text-sm text-red-500 flex items-center gap-1">
+                        <span className="text-xs">●</span>
+                        {errors.email}
+                      </p>
                     )}
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="subject" className="text-sm font-medium">
-                    Asunto
-                  </label>
-                  <input
+                  <Label htmlFor="subject">Asunto</Label>
+                  <Input
                     id="subject"
                     value={form.subject}
                     onChange={handleChange}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                     placeholder="Asunto del mensaje"
+                    className={errors.subject ? "border-red-500" : ""}
                   />
                   {errors.subject && (
-                    <p className="text-sm text-red-500">{errors.subject}</p>
+                    <p className="text-sm text-red-500 flex items-center gap-1">
+                      <span className="text-xs">●</span>
+                      {errors.subject}
+                    </p>
                   )}
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium">
-                    Mensaje
-                  </label>
-                  <textarea
+                  <Label htmlFor="message">Mensaje</Label>
+                  <Textarea
                     id="message"
                     value={form.message}
                     onChange={handleChange}
-                    className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                    placeholder="Tu mensaje..."
+                    placeholder="Cuéntame sobre tu proyecto..."
+                    className={`min-h-[140px] ${errors.message ? "border-red-500" : ""}`}
                   />
                   {errors.message && (
-                    <p className="text-sm text-red-500">{errors.message}</p>
+                    <p className="text-sm text-red-500 flex items-center gap-1">
+                      <span className="text-xs">●</span>
+                      {errors.message}
+                    </p>
                   )}
                 </div>
-                <Button className="w-full" disabled={loading}>
+                <Button 
+                  type="submit" 
+                  className="w-full group" 
+                  disabled={loading}
+                  size="lg"
+                >
                   {loading ? (
-                    <LoaderCircle className="h-8 w-8 animate-spin text-white" />
+                    <LoaderCircle className="h-5 w-5 animate-spin" />
                   ) : (
-                    "Enviar mensaje"
+                    <>
+                      <Send className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" />
+                      Enviar mensaje
+                    </>
                   )}
                 </Button>
               </form>
             </CardContent>
           </Card>
 
+          {/* Contact Info */}
           <div className="space-y-6">
-            <Card>
+            <Card className="hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 border-muted/50 bg-card/50 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle>Información de contacto</CardTitle>
+                <CardDescription>
+                  Encuentra otras formas de conectar conmigo
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="mt-2">
-                  <Link target="_blank" href={"mailto:harol.kock34@gmail.com"}>
-                    <div className="flex items-center gap-3">
-                      <Mail className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="font-medium">Email</p>
-                        <p className="text-muted-foreground">
-                          harol.kock34@gmail.com
+                {contactInfo.map((info, index) => {
+                  const Icon = info.icon;
+                  const content = (
+                    <div className="flex items-start gap-4 p-3 rounded-lg hover:bg-muted/50 transition-colors group cursor-pointer">
+                      <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                        <Icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-sm text-muted-foreground">
+                          {info.label}
+                        </p>
+                        <p className="text-sm font-medium truncate group-hover:text-primary transition-colors">
+                          {info.value}
                         </p>
                       </div>
+                      {info.href && (
+                        <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                      )}
                     </div>
-                  </Link>
-                </div>
+                  );
 
-                <div className="mt-2">
-                  <a
-                    target="_blank"
-                    href="https://www.linkedin.com/in/harol-morales-762b17114/"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Linkedin className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="font-medium">LinkedIn</p>
-                        <p className="text-muted-foreground">
-                          linkedin.com/in/harol-morales-762b17114/
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-
-                <div className="mt-2">
-                  <Link target="_blank" href="">
-                    <div className="flex items-center gap-3">
-                      <Github className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="font-medium">GitHub</p>
-                        <p className="text-muted-foreground">
-                          github.com/HaroruDa3
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
+                  return info.href ? (
+                    <Link
+                      key={index}
+                      href={info.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {content}
+                    </Link>
+                  ) : (
+                    <div key={index}>{content}</div>
+                  );
+                })}
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 border-muted/50 bg-gradient-to-br from-primary/5 to-primary/10 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle>¿Listo para trabajar juntos?</CardTitle>
+                <CardDescription>
+                  Disponible para proyectos freelance y oportunidades de tiempo completo
+                </CardDescription>
               </CardHeader>
-              <CardContent>
-                <p className="mb-4">
-                  Estoy disponible para proyectos freelance y oportunidades de
-                  tiempo completo. ¡Contáctame para discutir cómo puedo ayudar
-                  en tu próximo proyecto!
+              <CardContent className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Descarga mi currículum para conocer más sobre mi experiencia y habilidades técnicas.
                 </p>
                 <a href="/curriculum-harol-morales.pdf" download>
-                  <Button>Descargar CV</Button>
+                  <Button className="w-full group" size="lg">
+                    <Download className="h-4 w-4 mr-2 group-hover:translate-y-1 transition-transform" />
+                    Descargar CV
+                  </Button>
                 </a>
               </CardContent>
             </Card>

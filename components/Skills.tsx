@@ -2,224 +2,129 @@ import { Code } from "lucide-react";
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
+const SkillBar = ({ name, level }: { name: string; level: number }) => (
+  <div className="group">
+    <div className="flex justify-between items-center mb-1.5">
+      <span className="text-sm font-medium text-foreground/90 group-hover:text-foreground transition-colors">
+        {name}
+      </span>
+      <span className="text-xs text-muted-foreground font-semibold">
+        {level}%
+      </span>
+    </div>
+    <div className="w-full h-2 bg-muted/50 rounded-full overflow-hidden">
+      <div
+        className="bg-gradient-to-r from-primary to-primary/80 h-full rounded-full transition-all duration-500 ease-out group-hover:shadow-[0_0_8px_rgba(var(--primary),0.5)]"
+        style={{ width: `${level}%` }}
+      />
+    </div>
+  </div>
+);
+
 export const Skills = () => {
+  const skillCategories = [
+    {
+      title: "Lenguajes",
+      icon: "💻",
+      skills: [
+        { name: "JavaScript", level: 85 },
+        { name: "TypeScript", level: 80 },
+        { name: "C#", level: 75 },
+        { name: "Visual Basic", level: 75 },
+        { name: "Java", level: 65 },
+        { name: "C++", level: 50 },
+        { name: "PHP", level: 50 },
+      ],
+    },
+    {
+      title: "Frontend",
+      icon: "🎨",
+      skills: [
+        { name: "Bootstrap", level: 95 },
+        { name: "HTML/CSS", level: 90 },
+        { name: "React", level: 90 },
+        { name: "Next.js", level: 90 },
+        { name: "Ant Design", level: 90 },
+        { name: "JavaScript", level: 85 },
+        { name: "Tailwind CSS", level: 85 },
+        { name: "Ionic Framework", level: 85 },
+        { name: "Angular", level: 70 },
+        { name: "React Native", level: 70 },
+        { name: "DevExpress", level: 40 },
+      ],
+    },
+    {
+      title: "Backend",
+      icon: "⚙️",
+      skills: [
+        { name: "Express", level: 95 },
+        { name: "Firebase", level: 90 },
+        { name: "Node.js", level: 80 },
+        { name: "TypeScript", level: 80 },
+        { name: "PostgreSQL", level: 75 },
+        { name: "MySQL", level: 75 },
+        { name: "Supabase", level: 70 },
+        { name: "MongoDB", level: 70 },
+        { name: "Azure", level: 65 },
+        { name: ".NET", level: 50 },
+      ],
+    },
+    {
+      title: "Herramientas",
+      icon: "🛠️",
+      skills: [
+        { name: "VS Code", level: 90 },
+        { name: "Git", level: 85 },
+        { name: "Figma", level: 70 },
+        { name: "Docker", level: 60 },
+      ],
+    },
+  ];
+
   return (
-    <section id="habilidades" className="bg-muted/40 py-16">
-      <div className="container space-y-8">
-        <div className="flex items-center gap-2">
-          <Code className="h-6 w-6 text-primary" />
-          <h2 className="text-3xl font-bold">Habilidades</h2>
+    <section id="habilidades" className="relative py-20 bg-gradient-to-b from-background via-muted/20 to-background overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[size:40px_40px] pointer-events-none" />
+      <div className="absolute top-20 right-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="container relative z-10 space-y-12">
+        {/* Header */}
+        <div className="text-center space-y-4">       
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+            Habilidades
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Tecnologías y herramientas con las que trabajo para crear soluciones digitales
+          </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Lenguajes</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span>JavaScript</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[85%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>TypeScript</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[80%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Java</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[65%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>C++</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[50%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>C#</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[50%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>PHP</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[50%]"></div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Frontend</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span>HTML/CSS</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[90%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>JavaScript</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[85%]"></div>
-                </div>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span>React</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[90%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>NextJs</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[90%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Angular</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[70%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>React Native</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[70%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Ionic Framework - Android</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[85%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Bootstrap</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[95%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Ant Desing</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[90%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Tailwind CSS</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[85%]"></div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Backend</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span>Node.js</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[80%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>TypeScript</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[80%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Express</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[95%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Azure</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[65%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>PostgreSQL</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[75%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>MySQL</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[75%]"></div>
-                </div>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span>Firebase</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[90%]"></div>
-                </div>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span>Supabase</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[70%]"></div>
-                </div>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span>MongoDB</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[70%]"></div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Herramientas</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span>Git</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[85%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Docker</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[60%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Figma</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[70%]"></div>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>VS Code</span>
-                <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-[90%]"></div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {skillCategories.map((category, idx) => (
+            <Card
+              key={idx}
+              className="group hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 border-muted/50 hover:border-primary/30 bg-card/50 backdrop-blur-sm"
+            >
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-3 text-xl">
+                {/*  <span className="text-2xl">{category.icon}</span>*/}
+                  <span className="group-hover:text-primary transition-colors">
+                    {category.title}
+                  </span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {category.skills.map((skill, skillIdx) => (
+                  <SkillBar
+                    key={skillIdx}
+                    name={skill.name}
+                    level={skill.level}
+                  />
+                ))}
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
