@@ -151,7 +151,7 @@ export const Contactame = () => {
     {
       icon: MapPin,
       label: "Ubicación",
-      value: "San José Pinula, Guatemala",
+      value: "Tegucigalpa, Honduras",
       href: null,
     },
   ];
